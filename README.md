@@ -13,11 +13,13 @@ This script configures TPM2-backed automatic unlocking for the encrypted root vo
 
 The script is designed for a narrowly defined system layout:
 
-- Debian 13
+- Debian 13 use `debian-tpm-auto-unlock.bash`
+- Ubuntu 24 use `ubuntu-tpm-auto-unlock.bash`
 - LUKS2-encrypted root filesystem
 - LVM inside the encrypted volume
 - One encrypted root device
-- dracut as the initramfs generator
+- dracut as the initramfs generator for Debian
+- clevis as the initramfs generator for Ubuntu
 - A physical TPM 2.0 or VM vTPM
 - Root disk normally located at `/dev/sda3`
 - Console access for recovery and first-boot testing
