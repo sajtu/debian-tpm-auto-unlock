@@ -29,9 +29,10 @@ DEFAULT_SETUP_LUKSPW='your_iac_luks_passphrase'
 UNLOCK_LUKSPW="$DEFAULT_SETUP_LUKSPW"
 
 # if environment variable is set, use that.
-if [[ -n $ENV_SETUP_LUKSPW ]]; then
-	UNLOCK_LUKSPW="$ENV_SETUP_LUKSPW";
+if [[ -n "${ENV_SETUP_LUKSPW:-}" ]]; then
+	UNLOCK_LUKSPW="$ENV_SETUP_LUKSPW"
 fi
+
 
 
 EXPECTED_LUKS_DEVICE='/dev/sda3'
