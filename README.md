@@ -1,6 +1,8 @@
 # Debian LUKS2 TPM2 Automatic Unlock (debian-tpm-auto-unlock)
 Setup auto-unlock for LUKS secured root filesystem on Debian
-git clone git@github.com:/sajtu/debian-tpm-auto-unlock
+git clone git@github.com:/sajtu/debian-tpm-auto-unlock 
+or 
+git clone https://github.com/sajtu/debian-tpm-auto-unlock.git 
 
 This script configures TPM2-backed automatic unlocking for the encrypted root volume of a Debian 13 system using `systemd-cryptenroll` and dracut.
 
