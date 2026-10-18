@@ -14,7 +14,12 @@ This script configures TPM2-backed automatic unlocking for the encrypted root vo
 The script is designed for a narrowly defined system layout:
 
 - Debian 13 use `debian-tpm-auto-unlock.bash`
+  Debian script uses `dracut` for preparing its initramfs boot environment.
+  This script is tailored for dracut to support TPM2 auto-unlock.
 - Ubuntu 24 use `ubuntu-tpm-auto-unlock.bash`
+  Ubuntu uses `initramfs-tools` for preparing its initramfs boot environment.
+  This script is tailored for initramfs-tools to support TPM2 auto-unlock.
+  NOTE: some for some derivatives of Ubuntu that uses `dracut` instead of `initramfs-tools`. 
 - LUKS2-encrypted root filesystem
 - LVM inside the encrypted volume
 - One encrypted root device
