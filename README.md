@@ -1,32 +1,33 @@
 # Debian LUKS2 TPM2 Automatic Unlock (debian-tpm-auto-unlock)
 Setup auto-unlock for LUKS secured root filesystem on Debian
-git clone git@github.com:/sajtu/debian-tpm-auto-unlock 
+`git clone git@github.com:/sajtu/debian-tpm-auto-unlock`
 or 
-git clone https://github.com/sajtu/debian-tpm-auto-unlock.git 
+`git clone https://github.com/sajtu/debian-tpm-auto-unlock.git`
 
 This script configures TPM2-backed automatic unlocking for the encrypted root volume of a Debian 13 system using `systemd-cryptenroll` and dracut.
 
 > [!WARNING]
 > This script changes the LUKS2 header, `/etc/crypttab`, and the system initramfs. A mistake can make the system unbootable. Test it on disposable virtual machines before using it on production systems, retain a verified recovery passphrase, and have console access available for the first reboot.
 
+NOTE: debian-tpm-auto-unlock.bash is deprecated and unlock routine is merged into debian-tpm-auto-unlock.bash. debian-tpm-auto-unlock.bash should now unlock both Debian (dracut) and Ubuntu (initramfs-tool) and other variants where initramfs was setup by dracut, clevis, or initramfs-tools.
+
 ## Intended environment
 
 The script is designed for a narrowly defined system layout:
 
-- Debian 13 use `debian-tpm-auto-unlock.bash`
-  Debian script uses `dracut` for preparing its initramfs boot environment.
-  This script is tailored for dracut to support TPM2 auto-unlock.
-- Ubuntu 24 use `ubuntu-tpm-auto-unlock.bash`
-  Ubuntu uses `initramfs-tools` for preparing its initramfs boot environment.
-  This script is tailored for initramfs-tools to support TPM2 auto-unlock.
+- Debian 13
+  Debian (and AnduinOS) script uses `dracut` for preparing its initramfs boot environment.
+  This script automatically adjust for dracut to support TPM2 auto-unlock.
+- Ubuntu 22 uses `initramfs-tools` for preparing its initramfs boot environment.
+  This script automatically adjust for `initramfs-tools` to support TPM2 auto-unlock.
   NOTE: some for some derivatives of Ubuntu that uses `dracut` instead of `initramfs-tools`. 
 - LUKS2-encrypted root filesystem
 - LVM inside the encrypted volume
 - One encrypted root device
 - dracut as the initramfs generator for Debian
 - clevis as the initramfs generator for Ubuntu
+- initramfs-tool as the initramfs generator for Ubuntu
 - A physical TPM 2.0 or VM vTPM
-- Root disk normally located at `/dev/sda3`
 - Console access for recovery and first-boot testing
 
 Other storage layouts may require changes.
@@ -113,13 +114,13 @@ A LUKS header backup should be stored offline in a protected location. The heade
 Make the script executable:
 
 ```console
-chmod 0700 setup-luks-tpm.sh
+chmod 0700 debian-tpm-auto-unlock.bash
 ```
 
 Run it from a root console:
 
 ```console
-sudo ./setup-luks-tpm.sh
+sudo ./debian-tpm-auto-unlock.bash
 ```
 
 Follow the prompts to:
@@ -170,6 +171,10 @@ Keep the VM console open during the first reboot:
 
 ```console
 sudo reboot
+```
+or
+```console
+sudo systemctl reboot -i
 ```
 
 Expected behavior:
