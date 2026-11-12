@@ -9,7 +9,7 @@ This script configures TPM2-backed automatic unlocking for the encrypted root vo
 > [!WARNING]
 > This script changes the LUKS2 header, `/etc/crypttab`, and the system initramfs. A mistake can make the system unbootable. Test it on disposable virtual machines before using it on production systems, retain a verified recovery passphrase, and have console access available for the first reboot.
 
-NOTE: debian-tpm-auto-unlock.bash is deprecated and unlock routine is merged into debian-tpm-auto-unlock.bash. debian-tpm-auto-unlock.bash should now unlock both Debian (dracut) and Ubuntu (initramfs-tool) and other variants where initramfs was setup by dracut, clevis, or initramfs-tools.
+NOTE: ubuntu-tpm-auto-unlock.bash is deprecated and unlock routine is merged into debian-tpm-auto-unlock.bash. debian-tpm-auto-unlock.bash should now unlock both Debian (dracut) and Ubuntu (initramfs-tool) and other variants where initramfs was setup by dracut, clevis, or initramfs-tools.
 
 ## Intended environment
 
